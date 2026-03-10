@@ -1,5 +1,76 @@
-package com.Servlet;
+package com.servlet;
 
-public class UserServlet {
+import com.dao.UserDAO;
+import com.db.DBConnect;
+import com.user.UserDetails;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+public class UserServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        System.out.println("===== USER SERVLET STARTED =====");
+
+        try {
+            // Getting data from register.jsp form
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            String phone = request.getParameter("phone");
+
+            System.out.println("Received Data -> Name: " + name + ", Email: " + email);
+
+            // Store user details in model
+            UserDetails user = new UserDetails();
+            user.setName(name);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setPhone(phone);
+
+            // DAO Object
+            UserDAO dao = new UserDAO(DBConnect.getConn());
+            HttpSession session = request.getSession();
+
+            // Check if email already exists
+            if (dao.checkEmailExists(email)) {
+                session.setAttribute("reg-failed", "Email already exists. Please use another.");
+                System.out.println("ERROR: Email already exists!");
+                response.sendRedirect("register.jsp");
+                return;
+            }
+
+            // Insert user into DB
+            boolean success = dao.addUser(user);
+
+            if (success) {
+                session.setAttribute("reg-success", "Registration successful! Please login.");
+                System.out.println("SUCCESS: User registered!");
+                response.sendRedirect("login.jsp"); // ✅ GO TO LOGIN PAGE NOW
+            } else {
+                session.setAttribute("reg-failed", "Something went wrong. Try again.");
+                System.out.println("ERROR: Registration failed!");
+                response.sendRedirect("register.jsp");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("EXCEPTION: " + e.getMessage());
+            HttpSession session = request.getSession();
+            session.setAttribute("reg-failed", "Server error: " + e.getMessage());
+            response.sendRedirect("register.jsp");
+        }
+
+        System.out.println("===== USER SERVLET COMPLETED =====");
+        out.close();
+    }
 }
