@@ -25,41 +25,44 @@ A dynamic web-based **E-Book Management System** built using **Java Servlets and
 - **Architecture:** MVC Design Pattern  
 
 ---
-
 ## ⚙️ How to Run the Project
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Auro993/ePublications.git
-Import the project into Eclipse / IntelliJ
-Configure Apache Tomcat Server
-Add MySQL database:
-Create database
-Update DB credentials in DBConnect.java
-Run the project on server
+1️⃣ **Import the project** into *Eclipse / IntelliJ*  
 
-Open in browser:
+2️⃣ **Configure Apache Tomcat Server**  
 
-http://localhost:8080/E_Books
-📸 Screenshots
+3️⃣ **Setup MySQL Database**
+   - Create a new database  
+   - Update DB credentials in `DBConnect.java`  
 
-Add your project screenshots here (homepage, login, cart, etc.)
+4️⃣ **Run the project** on the server  
 
-🎯 Key Learnings
-Built full-stack Java web application using Servlets & JSP
-Implemented MVC architecture
-Learned session handling and database connectivity (JDBC)
-Improved understanding of web application deployment
-📌 Future Enhancements
-🔎 Advanced Search & Filters
-📱 Responsive Design Improvements
-👨‍💼 Admin Dashboard
-⭐ Book Ratings & Reviews
-👩‍💻 Author
+## 🎯 Key Learnings
 
-Aurosmita Sahoo
+✔ Built a full-stack web application using **Servlets & JSP**  
+✔ Implemented **MVC Architecture**  
+✔ Learned **Session Handling & Authentication**  
+✔ Integrated **MySQL using JDBC**  
+✔ Understood **Web Application Deployment**
 
-⭐ If you like this project
+---
 
-Give it a ⭐ on GitHub!
+## 📌 Future Enhancements
+
+🔎 Advanced Search & Filters  
+📱 Improved Responsive UI Design  
+👨‍💼 Admin Dashboard  
+⭐ Book Ratings & Reviews  
+
+---
+
+## 👩‍💻 Author
+
+**Aurosmita Sahoo**
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub 😊
 
